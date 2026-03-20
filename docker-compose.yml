@@ -1,30 +1,8 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    container_name: champart_mysql
-    restart: always
-    ports:
-      - "3307:3306"
-    environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./BE_ChamPart_TAK/Database:/docker-entrypoint-initdb.d  
-    networks:
-      - champart_network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
   app:
-    build: ./BE_ChamPart_TAK  
+    build: ./BE_ChamPart_TAK
     container_name: champart_api
     restart: always
     ports:
@@ -44,13 +22,10 @@ services:
       ADMIN_USERNAME: ${ADMIN_USERNAME}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-    depends_on:
-      db:
-        condition: service_healthy
     volumes:
-       - ./BE_ChamPart_TAK:/app 
-       - ./media:/media 
-       - /app/__pycache__ 
+      - ./BE_ChamPart_TAK:/app
+      - ./media:/media
+      - /app/__pycache__
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-delay 1
     networks:
       - champart_network
@@ -65,7 +40,7 @@ services:
       - app
     networks:
       - champart_network
-  
+
   frontend:
     build: ./FE_ChamPart_Website-TAK
     container_name: champart_frontend
@@ -85,7 +60,7 @@ services:
     image: nginx:latest
     container_name: nginx_reverse_proxy
     ports:
-      - "80:80"              
+      - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -93,9 +68,6 @@ services:
       - app
     networks:
       - champart_network
-
-volumes:
-  mysql_data:
 
 networks:
   champart_network:
