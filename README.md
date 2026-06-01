@@ -99,7 +99,6 @@ champart/
 │   │   └── main.py              # Entrypoint aplikasi & DB Lifespan
 │   ├── cron/                    # Docker container khusus untuk scheduler cron
 │   ├── Database_table/          # File SQL DDL dan DML untuk setup manual
-│   ├── test/                    # Pengujian otomatis backend (Pytest)
 │   └── Dockerfile               # Konfigurasi container backend
 │
 ├── FE_ChamPart_Website-TAK/     # Source Code Frontend (React + Vite)
