@@ -172,21 +172,21 @@ File `.env` di direktori utama digunakan untuk mengatur kredensial database, JWT
 
 | Variabel | Penjelasan | Contoh Nilai |
 | :--- | :--- | :--- |
-| `MYSQL_ROOT_PASSWORD` | Password root untuk database MySQL | `root` |
-| `MYSQL_PASSWORD` | Password pengguna MySQL non-root | `1234567` |
+| `MYSQL_ROOT_PASSWORD` | Password root untuk database MySQL | `apalah` |
+| `MYSQL_PASSWORD` | Password pengguna MySQL non-root | `inipwuseryagesya` |
 | `MYSQL_DATABASE` | Nama database utama | `champart` |
 | `MYSQL_HOST` | Host database (dalam Docker diisi nama service) | `db` |
 | `MYSQL_PORT` | Port database internal MySQL | `3306` |
 | `MYSQL_USER` | Nama pengguna database non-root | `user` |
-| `TOKEN_SECRET_KEY` | Kunci enkripsi tanda tangan JWT Token | `tanda tangan JWT` |
+| `TOKEN_SECRET_KEY` | Kunci enkripsi tanda tangan JWT Token | `gajadi-make-tubes-pbo...` |
 | `EMAIL` | Alamat Gmail SMTP untuk kirim email reminder | `champart.app@gmail.com` |
 | `EMAIL_PASSWORD` | App Password dari akun Gmail SMTP | `aotwcsuagmmngyzl` |
-| `CRON_SECRET_KEY` | Kunci otorisasi antara kontainer Cron & Backend | `sangat rahasia` |
+| `CRON_SECRET_KEY` | Kunci otorisasi antara kontainer Cron & Backend | `ini-sangat-rahasia...` |
 | `ACCESS_TOKEN_EXPIRE_MINUTE` | Masa berlaku Access Token JWT (menit) | `30` |
 | `REFRESH_TOKEN_EXPIRE_DAYS` | Masa berlaku Refresh Token JWT (hari) | `60` |
 | `ADMIN_USERNAME` | Username default untuk Admin Pengawas utama | `main` |
-| `ADMIN_EMAIL` | Email default untuk Admin Pengawas utama | `admin@email.com` |
-| `ADMIN_PASSWORD` | Password default untuk Admin Pengawas utama | `amat-rahasia` |
+| `ADMIN_EMAIL` | Email default untuk Admin Pengawas utama | `dfazzman@gmail.com` |
+| `ADMIN_PASSWORD` | Password default untuk Admin Pengawas utama | `rahasia-sekali...` |
 
 ---
 
@@ -198,38 +198,4 @@ Ketika backend dijalankan pertama kali, lifecycle **lifespan FastAPI** akan mend
 3. **Super Admin**: Secara otomatis mendaftarkan **Admin Pengawas Utama** menggunakan nilai `ADMIN_USERNAME`, `ADMIN_EMAIL`, dan `ADMIN_PASSWORD` dari file `.env` lengkap dengan enkripsi salt SHA-256 yang aman.
 
 ---
-
-## 🧪 Pengujian Perangkat Lunak (Software Testing)
-
-Sebagai proyek mata kuliah **IMPAL**, pengujian unit otomatis telah disiapkan di direktori backend menggunakan **Pytest**.
-
-### **Arsitektur Pengujian Unit**
-Untuk mempermudah pengujian lokal tanpa merusak data database MySQL utama, sistem uji menggunakan teknik **mocking engine SQLAlchemy**. Ketika pengujian dijalankan, engine koneksi database MySQL digantikan secara dinamis ke SQLite dalam-memori/file lokal (`test.db`).
-
-### **Cara Menjalankan Pengujian Backend**
-
-1. Masuk ke direktori backend:
-   ```bash
-   cd BE_ChamPart_TAK
-   ```
-2. Buat Python Virtual Environment (opsional namun direkomendasikan):
-   ```bash
-   python -m venv env
-   # Aktifkan virtual environment
-   # Windows:
-   .\env\Scripts\activate
-   # Linux/macOS:
-   source env/bin/activate
-   ```
-3. Instal dependensi backend:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Jalankan pengujian menggunakan `pytest`:
-   ```bash
-   pytest
-   ```
-
-Pengujian ini mencakup skenario pendaftaran pengguna, validasi data duplikat, dan penanganan status error respons dari API `/account/pengguna/register`.
-
-*Dibuat dengan 💙 oleh Tim ChamPart. Selamat menjelajahi kegiatan mahasiswa Anda!*
+*Dibuat dengan 💙 oleh Tim IMPAL ChamPart. Selamat menjelajahi kegiatan mahasiswa Anda!*
